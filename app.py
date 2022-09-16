@@ -87,6 +87,9 @@ def get_data():
 def review():
     return render_template('review.html')
 
+@app.route('/forum')
+def forum():
+    return render_template('forum.html')
 if(__name__=='__main__'):
 
     app.run(port=2000,debug=True)
