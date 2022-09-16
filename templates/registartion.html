@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration page</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles.css')}}">
+  
+	<!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> -->
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="r_form_wrap">
+		
+		<div class="title">
+			<p>Registration Form</p>
+		</div>
+
+		<div class="r_form">
+			<form method="post" action = "{{ url_for("get_data")}}">
+				<div class="input_wrap">
+					<label for="name">Your Name</label>
+					<div class="input_item">
+						<span class="icon">
+							<ion-icon name="person-sharp"></ion-icon>
+						</span>
+						<input type="text" name="name" class="input" id="name" required>
+					</div>
+				</div>
+				<div class="input_wrap">
+					<label for="email">Email Address</label>
+					<div class="input_item">
+						<span class="icon">
+							<ion-icon name="mail-sharp"></ion-icon>
+						</span>
+						<input type="text" name="email" class="input" id="email" required>
+					</div>
+				</div>
+				<div class="input_wrap">
+					<label for="psw">Password</label>
+					<div class="input_item">
+						<span class="icon">
+							<ion-icon name="key-sharp"></ion-icon>
+						</span>
+						<input type="password" name="psw" class="input" id="psw" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+					</div>
+				</div>
+				<div class="input_wrap">
+					<label for="age">Age</label>
+					<div class="input_item">
+						<span class="icon">
+							<ion-icon name="call-sharp"></ion-icon>
+						</span>
+						<input type="number" name="age" class="input" id="age">
+					</div>
+				</div>
+				<div class="input_wrap">
+					<label for="Fav_b">Favourite Book</label>
+					<div class="input_item">
+						<span class="icon">
+							<ion-icon name="mail-sharp"></ion-icon>
+						</span>
+						<input type="text" name="Fav_b" class="input" id="Fav_b" >
+					</div>
+				</div>
+				<div class="input_wrap">
+					<label for="Fav_a">Favourite Author</label>
+					<div class="input_item">
+						<span class="icon">
+							<ion-icon name="mail-sharp"></ion-icon>
+						</span>
+						<input type="text" name="Fav_a" class="input" id="Fav_a" >
+					</div>
+				</div>
+				<div class="input_wrap">
+					<label>Gender</label>
+					<div class="input_radio">
+						<div class="input_radio_item">
+							<input type="radio" id="male" name="gender" class="radio" value="male">
+							<label for="male" class="radio_mark">
+								<ion-icon class="i" name="male-sharp"></ion-icon>
+							Male</label>
+						</div>
+						<div class="input_radio_item">
+							<input type="radio" id="female" name="gender" class="radio" value="female">
+							<label for="female" class="radio_mark">
+								<ion-icon class="i" name="female-sharp"></ion-icon>
+								Female</label>
+						</div>
+						<div class="input_radio_item">
+							<input type="radio" id="others" name="gender" class="radio" value="others">
+							<label for="others" class="radio_mark">
+								<ion-icon class="i" name="male-female-sharp"></ion-icon>
+								Others</label>
+						</div>
+					</div>
+				</div>
+
+				<button>Register Now</button>
+			</form>
+		</div>
+
+	</div>
+</div>
+
+</body>
+</html>

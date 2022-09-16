@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <h1>Login page</h1>
+</head>
+<body>
+    <h4>{% with messages = get_flashed_messages() %}  
+
+        {% if messages %}  
+    
+              {% for message in messages %}  
+    
+                   <p>{{ message }}</p>  
+    
+              {% endfor %}  
+    
+        {% endif %}  
+    
+     {% endwith %} </h4>
+    <form  method="post" action = "/"  >
+        <div class="container">
+
+          <label for="Email ID"><b>Email ID</b></label>
+          <input type="email" placeholder="Enter Email Id" name="email" id="email" required>
+
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+          <button type="submit">Login</button>
+
+          <h2>Register here</h2>
+          
+
+          <button onclick="location.href='http://127.0.0.1:2000/registration'" type="button">Register</button>
+          
+
+</body>
