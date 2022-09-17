@@ -27,6 +27,7 @@ bcrypt = Bcrypt(app)
 mongo=PyMongo(app)
 
 db=mongo.db.users 
+db2=mongo.db.Book
 
 
 @app.route('/', methods=['POST','GET'])
@@ -85,11 +86,17 @@ def get_data():
     return redirect('/')
 @app.route('/review')
 def review():
-    return render_template('review.html')
+    k=db2.find({'authors':'J.K. Rowling'})
+    kk=[]
+    for i in k:
+        kk.append(i)
+        
+    return render_template('review.html',kk=kk)
 
 @app.route('/forum')
 def forum():
     return render_template('forum.html')
+
 if(__name__=='__main__'):
 
     app.run(port=2000,debug=True)
