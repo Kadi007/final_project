@@ -1,3 +1,4 @@
+
 from flask import Flask,render_template,request,jsonify,flash,redirect,session
 from flask_pymongo import PyMongo
 from password_strength import PasswordPolicy
@@ -81,16 +82,18 @@ def get_data():
         'Fav_b':request.form['Fav_b'],
         'Fav_a':request.form['Fav_a']
 
-        })  
-    
+        })      
     return redirect('/')
-@app.route('/review')
+@app.route('/review',methods=['POST','GET'])
 def review():
-    k=db2.find({'authors':'J.K. Rowling'})
     kk=[]
+    Sear=' J.K. Rowling'
+    ##Sear = request.form['aa']
+    k=db2.find({'authors':Sear})
+        
     for i in k:
         kk.append(i)
-        
+    print(kk)
     return render_template('review.html',kk=kk)
 
 @app.route('/forum')
