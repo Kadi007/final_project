@@ -31,6 +31,11 @@ mongo=PyMongo(app)
 
 db=mongo.db.users 
 db2=mongo.db.Book
+db3=mongo.db.forum
+
+k=db2.insert_one({
+
+})
 
 
 @app.route('/', methods=['POST','GET'])
@@ -92,22 +97,59 @@ def review():
     kk=[]
     if request.method == "POST":
         bo_title=request.form['name']
-        
-        k=db2.find({'title':bo_title})
-        
+        rate_k=request.form['rat']
+        idk=db2.find({'title':bo_title})
+        ratingvar=list(db2.find({'title':bo_title},{'average_rating':1,'_id':0}))
+        print(ratingvar)
+        k=db2.find({'title':bo_title},{'average_rating':1,'ratings_count':1,'_id':0})
+        op=list(k)
+        print(op)
+        print(op[0])
+        print(rate_k)
 
-        for i in k:
+        for i in idk:
           kk.append(i)
-        #print(kk)
+
+        
+        
+    
+    
+
        
     return render_template('review.html',kk=kk)
 
 @app.route('/forum')
 def forum():
-    return render_template('forum.html')
+    kd=[]
+    ss=db3.find()
+    for i in ss:
+        kd.append(i)
+    print(kd)
+    return render_template('forum.html',kd=kd)
 
-# @app.route('/tp')
-# def tp:
+@app.route('/posting', methods=['POST','GET'])
+def post():
+    if request.method == "POST":
+        kk=db3.insert_one({
+
+        'name':request.form['name'],
+        'title':request.form['title'],
+        'content' :request.form['content']
+
+        })
+
+    return render_template('forum_form.html')
+
+@app.route('/forum/<bookID>', methods=['POST','GET'])
+def b_review(bookID):
+    ks=[]
+    oops=db3.find({'bookID':bookID})
+    
+    for i in oops:
+        ks.append(i)
+    return render_template('/review.html',ks=ks)
+        
+
 
 
 if(__name__=='__main__'):

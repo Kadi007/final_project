@@ -14,21 +14,19 @@
       
       <label for="name"><b>Name of the Book</b></label>
       <input type="text" placeholder="Enter name" name="name" id="name" >
-
-      
-       
-  
-    
+      <br>
+      <br>
        <button type="submit" class="registerbtn">Search</button> 
     </div>
-  
-  
-      
-</form>
+        
+
 {% block body %}
 
 {% for i in kk %}
-  <h2>The name of the book is:  {{i.title}} </h2> 
+  <h1>{% set kadir = i.bookID %}</h1> 
+  <h1>{{kadir}}</h1>
+  <a href="{{ url_for('forum',kadir=kadir)}}">  <h2>The name of the book is:  {{i.title}} </h2> 
+  </a>
   <h2>The average rating of this book is :{{i.average_rating}}</h2>
   <h2>Total number of reviews : {{i.ratings_count}}</h2>
 {% endfor %} 
@@ -38,9 +36,12 @@
 <h1>-------------------------------------------</h1>
 <h2>Rate the book between 1 and 5</h2>
 <h2>one being the worst and 5 being the Best</h2>
-<form>
-  <label for="rate"><b>Rating of the books</b></label>
-  <input type="number" placeholder="Enter name" name="rate" id="rate" max = 5>
+<br>
+
+<label for="rat"><b>Rate the book: </b></label>
+<input type="number" placeholder="Enter rating" name="rat" id="rat" max = 5 step="0.1">
+  <br>
+  <br>
   <button type="submit" class="registerbtn">submit</button> 
 </form>
 

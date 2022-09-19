@@ -1,15 +1,18 @@
+<!DOCTYPE html>
 {% extends "layout.html" %}
+<body>
 {% block content %}
-    {% for post in posts %}
+    {% for i in kd %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ post.author }}</a>
-              <small class="text-muted">{{ post.date_posted }}</small>
+              <a class="mr-2" href="#">{{ i.name }}</a>
             </div>
-            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
+            <h2><a class="article-title" href="#">{{ i.title }}</a></h2>
+            <p class="article-content">{{ i.content }}</p>
           </div>
         </article>
     {% endfor %}
 {% endblock content %}
+<a id="Section1"></a>
+</body>
