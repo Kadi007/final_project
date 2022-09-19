@@ -1,18 +1,51 @@
 <!DOCTYPE html>
-<h1>Review Page </h1>
+<head>
+  <title>Review_page</title>
+</head>
+<html>
+
 <body>
-    {% block body %}
-
-    {{kk}}
-
-  {% endblock %}
-
-  <form method="get" action = "/review">
-    <label for="aa">FIND THE BOOKS</label>
-    <input type="text" name="aa" class="input" id="aa" required>
 
 
-  </form>
-  <button>Register Now</button>
+  
+
+<form  method="POST" action = "/review"  >
+    <div class="container">
+      
+      <label for="name"><b>Name of the Book</b></label>
+      <input type="text" placeholder="Enter name" name="name" id="name" >
+
+      
+       
+  
+    
+       <button type="submit" class="registerbtn">Search</button> 
+    </div>
+  
+  
+      
+</form>
+{% block body %}
+
+{% for i in kk %}
+  <h2>The name of the book is:  {{i.title}} </h2> 
+  <h2>The average rating of this book is :{{i.average_rating}}</h2>
+  <h2>Total number of reviews : {{i.ratings_count}}</h2>
+{% endfor %} 
+
+{% endblock %}
+
+<h1>-------------------------------------------</h1>
+<h2>Rate the book between 1 and 5</h2>
+<h2>one being the worst and 5 being the Best</h2>
+<form>
+  <label for="rate"><b>Rating of the books</b></label>
+  <input type="number" placeholder="Enter name" name="rate" id="rate" max = 5>
+  <button type="submit" class="registerbtn">submit</button> 
+</form>
+
+ 
 
 </body>
+
+</html>

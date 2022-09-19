@@ -1,4 +1,6 @@
 
+from asyncio.windows_events import NULL
+from re import S
 from flask import Flask,render_template,request,jsonify,flash,redirect,session
 from flask_pymongo import PyMongo
 from password_strength import PasswordPolicy
@@ -63,7 +65,7 @@ def home():
 
 
 
-@app.route('/registration',methods=['GET','POST'])
+@app.route('/registration', methods=['GET','POST'])
 def Register():
     return render_template('registartion.html')
 
@@ -84,21 +86,29 @@ def get_data():
 
         })      
     return redirect('/')
+
 @app.route('/review',methods=['POST','GET'])
 def review():
     kk=[]
-    Sear=' J.K. Rowling'
-    ##Sear = request.form['aa']
-    k=db2.find({'authors':Sear})
+    if request.method == "POST":
+        bo_title=request.form['name']
         
-    for i in k:
-        kk.append(i)
-    print(kk)
+        k=db2.find({'title':bo_title})
+        
+
+        for i in k:
+          kk.append(i)
+        #print(kk)
+       
     return render_template('review.html',kk=kk)
 
 @app.route('/forum')
 def forum():
     return render_template('forum.html')
+
+# @app.route('/tp')
+# def tp:
+
 
 if(__name__=='__main__'):
 
