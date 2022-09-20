@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Profile Page</title>
+    </head>
+    <body>
+        {% block body %}
+
+        {% for i in ka %}
+            <h2>{{i.email}}</h2>
+            <br>
+            <h2>{{i.name}}</h2>
+            
+            <br>
+            <h2>{{i.Fav_b}}</h2>
+            
+            <br>
+            <h2>{{i.Fav_a}}</h2>
+        {% endfor %} 
+
+        {% endblock %}
+
+        <a onclick="location.href='http://127.0.0.1:2000/homepage'">Home page</a>
+
+    </body>
+</html>

@@ -1,6 +1,3 @@
-
-from asyncio.windows_events import NULL
-from re import S
 import json
 from flask import Flask,render_template,request,jsonify,flash,redirect,session
 from flask_pymongo import PyMongo
@@ -12,12 +9,12 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
-policy = PasswordPolicy.from_names(
-    length=8,  # min length: 8
-    uppercase=1,  # need min. 2 uppercase letters
-    numbers=1,  # need min. 2 digits
-    strength=0.66 # need a password that scores at least 0.5 with its entropy bits
-)
+# policy = PasswordPolicy.from_names(
+#     length=8,  # min length: 8
+#     uppercase=1,  # need min. 2 uppercase letters
+#     numbers=1,  # need min. 2 digits
+#     strength=0.66 # need a password that scores at least 0.5 with its entropy bits
+# )
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config['SECRET_KEY'] = '@#$%^&*('
@@ -95,49 +92,45 @@ def get_data():
 
 @app.route('/review',methods=['POST','GET'])
 def review():
-    # kk=[]
-    # kip=[]
+    kk=[]
+    kip=[]
     if request.method == "POST":
-        #bo_title=request.form['name']
-        #print(bo_title)
+        bo_title=request.form['name']
+        print(bo_title)
         rate_k=request.form['rat']
-        print(rate_k)
-        shi=float(rate_k)
-        print(type(shi))
-    #     idk=db2.find({'title':bo_title})
-    #     ratingvar=list(db2.find({'title':bo_title},{'average_rating':1,'_id':0}))
-    #     print(ratingvar)
+        idk=db2.find({'title':bo_title})
+        ratingvar=list(db2.find({'title':bo_title},{'average_rating':1,'_id':0}))
+        print(ratingvar)
         
-    #     k=db2.find({'title':bo_title},{'average_rating':1,'ratings_count':1,'_id':0})
+        k=db2.find({'title':bo_title},{'average_rating':1,'ratings_count':1,'_id':0})
     
-    #     for i in k:
-    #         avg=i['average_rating']
-    #         print(avg)
-        #print(avg)
-        #print(cou)
-        #   tot=avg*cou
-    #rate_k="43.23"
-        # print(shi)
-        # print(type(shi))
-        # print(float(shi))
-        # print(type(shi))
-        #new=int(float(rate_k))
+        for i in k:
+            avg=i['average_rating']
+            cou=i['ratings_count']
+        
+        tot=avg*cou
+        
+        new=float(rate_k)
         #print(new)
-        #dev=int(rate_k)
-        # tot=tot+rate_k
-        # cou=cou+1
-        # final=tot/cou
+        
+        tot=tot+new
+        #print(tot)
+        cou=cou+1
+        #print(cou)
 
-        # gar=db2.update_one({'title':bo_title,'average_count':final})
-        # print(gar)
+        final=tot/cou
+        #print(final)
+
+        gar=db2.update_one({'title':bo_title},{'$set' :{'average_rating':final}})
+        print(gar)
         
 
         
-        # for i in idk:
-        #   kk.append(i)   
+        for i in idk:
+          kk.append(i)   
 
        
-    return render_template('review.html')
+    return render_template('review.html',kk=kk)
 
 @app.route('/forum')
 def forum():
@@ -171,8 +164,18 @@ def b_review(bookID):
     return render_template('/review.html',ks=ks)
         
 
-# @app.route('/profile',methods=['POST','GET'])
-# def prof():
+@app.route('/profile',methods=['POST','GET'])
+def prof():
+    uemail= session["email"]
+    print(uemail)
+    ka=[]
+    k=db.find({'email':uemail},{'email':1,'name':1,'Fav_b':1,'Fav_a':1,'_id':0})
+    
+    for i in k:
+        ka.append(i)
+    print(ka)
+
+    return render_template('profile.html',ka=ka)
 
 
 if(__name__=='__main__'):
