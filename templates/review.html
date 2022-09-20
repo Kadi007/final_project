@@ -5,11 +5,9 @@
 <html>
 
 <body>
+ 
 
-
-  
-
-<form  method="POST" action = "/review"  >
+<!-- <form  method="POST" action = "/review"  >
     <div class="container">
       
       <label for="name"><b>Name of the Book</b></label>
@@ -18,7 +16,7 @@
       <br>
        <button type="submit" class="registerbtn">Search</button> 
     </div>
-        
+</form>        -->
 
 {% block body %}
 
@@ -37,9 +35,9 @@
 <h2>Rate the book between 1 and 5</h2>
 <h2>one being the worst and 5 being the Best</h2>
 <br>
-
+<form  method="POST" action = "/review"  >
 <label for="rat"><b>Rate the book: </b></label>
-<input type="number" placeholder="Enter rating" name="rat" id="rat" max = 5 step="0.1">
+<input type="number" placeholder="Enter rating" name="rat" id="rat" step="0.1" max = 5>
   <br>
   <br>
   <button type="submit" class="registerbtn">submit</button> 

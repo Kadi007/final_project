@@ -1,6 +1,7 @@
 
 from asyncio.windows_events import NULL
 from re import S
+import json
 from flask import Flask,render_template,request,jsonify,flash,redirect,session
 from flask_pymongo import PyMongo
 from password_strength import PasswordPolicy
@@ -94,29 +95,49 @@ def get_data():
 
 @app.route('/review',methods=['POST','GET'])
 def review():
-    kk=[]
+    # kk=[]
+    # kip=[]
     if request.method == "POST":
-        bo_title=request.form['name']
+        #bo_title=request.form['name']
+        #print(bo_title)
         rate_k=request.form['rat']
-        idk=db2.find({'title':bo_title})
-        ratingvar=list(db2.find({'title':bo_title},{'average_rating':1,'_id':0}))
-        print(ratingvar)
-        k=db2.find({'title':bo_title},{'average_rating':1,'ratings_count':1,'_id':0})
-        op=list(k)
-        print(op)
-        print(op[0])
         print(rate_k)
+        shi=float(rate_k)
+        print(type(shi))
+    #     idk=db2.find({'title':bo_title})
+    #     ratingvar=list(db2.find({'title':bo_title},{'average_rating':1,'_id':0}))
+    #     print(ratingvar)
+        
+    #     k=db2.find({'title':bo_title},{'average_rating':1,'ratings_count':1,'_id':0})
+    
+    #     for i in k:
+    #         avg=i['average_rating']
+    #         print(avg)
+        #print(avg)
+        #print(cou)
+        #   tot=avg*cou
+    #rate_k="43.23"
+        # print(shi)
+        # print(type(shi))
+        # print(float(shi))
+        # print(type(shi))
+        #new=int(float(rate_k))
+        #print(new)
+        #dev=int(rate_k)
+        # tot=tot+rate_k
+        # cou=cou+1
+        # final=tot/cou
 
-        for i in idk:
-          kk.append(i)
+        # gar=db2.update_one({'title':bo_title,'average_count':final})
+        # print(gar)
+        
 
         
-        
-    
-    
+        # for i in idk:
+        #   kk.append(i)   
 
        
-    return render_template('review.html',kk=kk)
+    return render_template('review.html')
 
 @app.route('/forum')
 def forum():
@@ -150,6 +171,8 @@ def b_review(bookID):
     return render_template('/review.html',ks=ks)
         
 
+# @app.route('/profile',methods=['POST','GET'])
+# def prof():
 
 
 if(__name__=='__main__'):
