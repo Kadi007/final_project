@@ -4,23 +4,30 @@
         <title>new forum post</title>
     </head>
     <body>
-        <form method="POST" action = "/posting">
+        {% block body %}
+
+            {% for i in kak %}
+        <form method="POST" action = " ">
             <!-- <label for="name"> Enter your name:</label>
             <input type="text" id="name" name="name" placeholder="Name"  /> -->
 
             <br>
             <br>
             <label for="title"> Title of the Post :</label>
-            <input type="text" id="title" name="title" placeholder="Title of the post" required/>
+            <input type="text" id="title" name="title" placeholder="Title of the post" value="{{i["title"]}}" required/>
             <br>
             <br>
             <label for="content"> Enter your Content :</label>
 
-            <input type="text" id="content" name="content" placeholder="Enter your Content" required/>
+            <input type="text" id="content" name="content" placeholder="Enter your Content" value="{{i["content"]}}" required/>
             <br>
             <br>
 
             <button type="submit"> Enter</button>
         </form>
+        {% endfor %} 
+
+        {% endblock %}
+
     </body>
 </html>

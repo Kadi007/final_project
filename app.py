@@ -134,6 +134,7 @@ def review():
 
 @app.route('/forum')
 def forum():
+    
     kd=[]
     ss=db3.find()
     for i in ss:
@@ -143,14 +144,23 @@ def forum():
 
 @app.route('/posting', methods=['POST','GET'])
 def post():
+    ka=[]
+    uemail= session["email"]
+    k=db.find({'email':uemail},{'name':1,'_id':0})
+    for i in k:
+        ka.append(i)
+    kk=ka[0]["name"]
     if request.method == "POST":
         kk=db3.insert_one({
-
-        'name':request.form['name'],
+        
+        'name':kk,
+        #'name':request.form['name'],
         'title':request.form['title'],
         'content' :request.form['content']
 
         })
+
+        return redirect("/forum")
 
     return render_template('forum_form.html')
 
@@ -162,7 +172,26 @@ def b_review(bookID):
     for i in oops:
         ks.append(i)
     return render_template('/review.html',ks=ks)
+
+@app.route("/forum_edit",methods=['POST','GET'])
+def for_edit():
+    ka=[]
+    kak=[]
+    uemail= session["email"]
+    k=db.find({'email':uemail},{'name':1,'_id':0})
+    for i in k:
+        ka.append(i)
+    kk=ka[0]["name"]
+    if request.method == "GET":
+        k2=db3.find({'name':kk},{'title':1,'content':1,'_id':0})
+        for i in k2:
+            kak.append(i)
         
+    if request.method == "POST":
+        garvit=db2.update_one({'name':kk},{'$set' :{'title':request.form['title'],'content':request.form['content']}})
+        print(garvit)
+        return redirect("/forum")    
+    return render_template("update.html",kak=kak)  
 
 @app.route('/profile',methods=['POST','GET'])
 def prof():
@@ -175,7 +204,15 @@ def prof():
         ka.append(i)
     print(ka)
 
+
+
     return render_template('profile.html',ka=ka)
+
+@app.route('/logout',methods=['POST','GET'])
+def logout():
+    session["email"] = None
+
+    return redirect("/")
 
 
 if(__name__=='__main__'):
